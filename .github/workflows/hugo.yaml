@@ -51,6 +51,10 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Install Hugo theme
+        run: |
+          hugo mod init github.com/PavlosMelissinos/proledata
+          hugo mod get -u github.com/adityatelange/hugo-PaperMod
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
@@ -61,10 +65,6 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"          
-      - name: Install theme
-        run: |
-          hugo mod init github.com/PavlosMelissinos/proledata
-          hugo mod get -u github.com/adityatelange/hugo-PaperMod
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
