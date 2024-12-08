@@ -1,8 +1,0 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'Proledata docs'
-[params]
-  # subtitle = ''
-  # [params.contact]
-    # email = 'info@example.org'
-    # phone = '+1 202-555-1212'

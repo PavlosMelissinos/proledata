@@ -61,6 +61,10 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"          
+      - name: Install theme
+        run: |
+          hugo mod init github.com/PavlosMelissinos/proledata
+          hugo mod get -u github.com/adityatelange/hugo-PaperMod
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
