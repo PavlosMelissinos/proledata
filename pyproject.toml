@@ -1,0 +1,124 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "proledata"
+version = "0.1"
+license = "LicenseRef-Proprietary"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "plotly==5.24.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    'ipykernel',
+    'uvicorn',
+]
+linting = [
+    'ruff==0.4.4',
+]
+testing = [
+    "pytest==8.2.0"
+]
+
+[tool.pyright]
+extraPaths = ["__pypackages__/<major.minor>/lib/"]
+
+[tool.hatch.version]
+path = "app/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+norecursedirs = ".git .tox .env .venv .eggs __pycache__ .pytest_cache .aws-sam"
+testpaths = "tests"
+# markers = []
+
+[tool.ruff]
+src = ["."]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+output-format = "grouped"
+line-length = 120
+
+[tool.ruff.lint]
+# List of rules https://docs.astral.sh/ruff/rules/
+select = [
+    # "B",     # bugbear
+    "E112",  # no-indented-block
+    "E2",    # Whitespace problems (missing or unexpected)
+    "E402",  # module-import-not-at-top-of-file
+    "E71",   # Comparison errors
+    "E721",  # type-comparison
+    "E722",  # bare-except
+    "E9",
+    "I001",  # unsorted-imports
+    "W291",  # trailing-whitespace
+    "W292",  # missing-newline-at-end-of-file
+    "W293",  # blank-line-with-whitespace
+    #"UP",    # pyupgrade
+    # "PT",    # flake8-pytest-style
+    # "G",     # flake8-logging-format
+    "D201",  # no-blank-line-before-function
+    "D202",  # no-blank-line-after-function
+    "D212",  # multi-line-summary-first-line
+    "D400",  # ends-in-period
+    "D401",  # non-imperative-mood
+    "ASYNC", # flake8-async
+    "COM",   # flake8-commas
+    # "T20",   # flake8-print
+    "RET",   # flake8-return  # use for warning
+    "SIM",   # flake8-simplify
+    # "ARG",   # flake8-unused-arguments  # use for warning / improvements
+    # "PL",    # pylint
+    # "F821",  # undefined-name
+    "F401",  # unused-import
+    "F841",  # unused-variable
+    "ARG001",  # unused-function-argument
+]
+
+ignore = [
+    "UP015",   # redundant-open-modes
+    "E501",    # line-too-long
+    "SIM112",  # uncapitalized-environment-variables
+    "RET503",  # implicit-return
+    "D407",    # dashed-underline-after-section
+    "SIM113",  # enumerate-for-loop
+    "SIM108",  # if-else-block-instead-of-if-exp
+    "SIM110",  # reimplemented-builtin
+]
+
+[tool.ruff.format]
+quote-style = "preserve"  # TODO: replace with "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+exclude = []
+line-ending = "lf"
+preview = false
+skip-magic-trailing-comma = false
