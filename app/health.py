@@ -184,3 +184,10 @@ if __name__ == "__main__":
     fig = create_healthcare_plots()
     fig.show()
     # fig.write_html("healthcare_plots.html")
+
+    import os
+
+    if not os.path.exists("docs"):
+        os.mkdir("docs")
+
+    fig.write_html("docs/health.html")
