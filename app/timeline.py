@@ -171,11 +171,10 @@ def create_timeline_trace(name, events, vertical=False, scale=1.0):
 
     return fig
 
-# Example usage
-events = json.loads((project_root / "resources" / "events.json").read_text())
-
 
 if __name__ == "__main__":
+    events = json.loads((project_root / "resources" / "events.json").read_text())
+
     vertical = True
     fig = create_timeline_trace(
         name="Ιστορικό του πολέμου στη Συρία",
@@ -183,3 +182,9 @@ if __name__ == "__main__":
         vertical=vertical
     )
     fig.show()
+
+    static_path = project_root / "static"
+    if not static_path.exists():
+        static_path.mkdir()
+
+    fig.write_html(static_path / "syria_war.html")
